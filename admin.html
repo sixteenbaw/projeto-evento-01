@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrições · Órbita Nexus Live 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-glow page-glow-left"></div>
+  <div class="page-glow page-glow-right"></div>
+
+  <main class="section">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark">ON</span>
+        <div>
+          <strong>Órbita Nexus Live</strong>
+          <span>Painel de inscrições</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="/index.html">Voltar ao site</a>
+      </div>
+    </nav>
+
+    <section class="section-heading reveal" style="margin-top: 42px;">
+      <p class="section-tag">Backoffice</p>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 4rem);">Inscrições recebidas</h1>
+      <p class="lead">Esta área mostra os dados enviados pelo formulário e lidos diretamente do backend local.</p>
+    </section>
+
+    <section class="metrics reveal">
+      <article>
+        <strong id="total-inscricoes">0</strong>
+        <span>Total de inscrições</span>
+      </article>
+      <article>
+        <strong id="ultimo-envio">--</strong>
+        <span>Último envio</span>
+      </article>
+      <article>
+        <strong id="ultimo-perfil">--</strong>
+        <span>Último perfil</span>
+      </article>
+      <article>
+        <strong>JSON</strong>
+        <span>Salvo localmente no projeto</span>
+      </article>
+    </section>
+
+    <section class="chatbot-shell reveal" style="margin-top: 26px;">
+      <div class="section-heading" style="margin-bottom: 16px;">
+        <p class="section-tag">Lista</p>
+        <h2>Todas as inscrições</h2>
+      </div>
+      <p id="admin-feedback" class="feedback">Carregando inscrições...</p>
+      <div id="inscricoes-lista" class="admin-list"></div>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE =
+      window.location.protocol === "file:"
+        ? "http://127.0.0.1:3000"
+        : window.location.origin;
+    const IS_LOCAL_SERVER =
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost";
+
+    async function carregarInscricoes() {
+      const feedback = document.getElementById("admin-feedback");
+      const lista = document.getElementById("inscricoes-lista");
+      const total = document.getElementById("total-inscricoes");
+      const ultimoEnvio = document.getElementById("ultimo-envio");
+      const ultimoPerfil = document.getElementById("ultimo-perfil");
+
+      try {
+        let inscricoes = [];
+
+        if (IS_LOCAL_SERVER) {
+          const response = await fetch(`${API_BASE}/api/inscricoes`);
+          if (!response.ok) throw new Error("Falha ao buscar inscrições");
+          inscricoes = await response.json();
+        } else {
+          inscricoes = JSON.parse(localStorage.getItem("orbitanexus_inscricoes") || "[]");
+        }
+
+        total.textContent = inscricoes.length;
+
+        if (!inscricoes.length) {
+          ultimoEnvio.textContent = "--";
+          ultimoPerfil.textContent = "--";
+          feedback.textContent = "Ainda não há inscrições salvas.";
+          lista.innerHTML = "";
+          return;
+        }
+
+        const ultima = inscricoes[0];
+        ultimoEnvio.textContent = new Date(ultima.enviadoEm).toLocaleDateString("pt-BR");
+        ultimoPerfil.textContent = ultima.interesse || "--";
+        feedback.textContent = IS_LOCAL_SERVER
+          ? `${inscricoes.length} inscrição(ões) encontrada(s).`
+          : `${inscricoes.length} inscrição(ões) encontrada(s) neste navegador.`;
+
+        lista.innerHTML = inscricoes.map((item) => `
+          <article class="post-card">
+            <h3>${item.nome}</h3>
+            <p><strong>E-mail:</strong> ${item.email}</p>
+            <p><strong>Telefone:</strong> ${item.telefone}</p>
+            <p><strong>Perfil:</strong> ${item.interesse}</p>
+            <p><strong>Objetivo:</strong> ${item.objetivo || "Não informado"}</p>
+            <p><strong>Enviado em:</strong> ${new Date(item.enviadoEm).toLocaleString("pt-BR")}</p>
+          </article>
+        `).join("");
+      } catch (error) {
+        feedback.classList.add("is-error");
+        feedback.textContent = IS_LOCAL_SERVER
+          ? `Não foi possível carregar as inscrições. Verifique se http://127.0.0.1:3000 está aberto. Detalhe: ${error.message}`
+          : `Não foi possível carregar as inscrições neste navegador. Detalhe: ${error.message}`;
+      }
+    }
+
+    carregarInscricoes();
+  </script>
+</body>
+</html>
