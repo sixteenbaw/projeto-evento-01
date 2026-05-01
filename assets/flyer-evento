@@ -1,0 +1,29 @@
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="60" x2="930" y2="1260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#120C2C"/><stop offset="0.55" stop-color="#1C2C5B"/><stop offset="1" stop-color="#0A1020"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="180" y1="220" x2="840" y2="1020" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00D1C7" stop-opacity="0.92"/><stop offset="1" stop-color="#5F8DFF" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1350" fill="url(#bg)"/>
+  <circle cx="180" cy="160" r="180" fill="#00D1C7" fill-opacity="0.12"/>
+  <circle cx="920" cy="220" r="140" fill="#FFB84D" fill-opacity="0.12"/>
+  <rect x="86" y="86" width="908" height="1178" rx="42" fill="#FFFFFF" fill-opacity="0.03" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <rect x="136" y="152" width="140" height="140" rx="28" fill="url(#glow)"/>
+  <text x="206" y="238" fill="#081120" font-size="62" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">ON</text>
+  <text x="136" y="360" fill="#FFB84D" font-size="30" font-family="Arial, sans-serif" letter-spacing="7">EXPERIENCIA AUTORAL</text>
+  <text x="136" y="470" fill="#F7F7FF" font-size="92" font-family="Arial, sans-serif" font-weight="700">Orbita</text>
+  <text x="136" y="566" fill="#F7F7FF" font-size="92" font-family="Arial, sans-serif" font-weight="700">Nexus Live</text>
+  <text x="136" y="660" fill="#00D1C7" font-size="82" font-family="Arial, sans-serif" font-weight="700">2026</text>
+  <text x="136" y="746" fill="#C7D1EA" font-size="36" font-family="Arial, sans-serif">Criatividade, IA e estrategia em uma experiencia</text>
+  <text x="136" y="796" fill="#C7D1EA" font-size="36" font-family="Arial, sans-serif">imersiva para quem quer criar o proximo passo.</text>
+  <rect x="136" y="890" width="808" height="126" rx="24" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.12"/>
+  <text x="184" y="950" fill="#F7F7FF" font-size="42" font-family="Arial, sans-serif" font-weight="700">18 JULHO 2026</text>
+  <text x="184" y="996" fill="#C7D1EA" font-size="30" font-family="Arial, sans-serif">Arca Hub - Sao Paulo - 09h00 as 19h00</text>
+  <rect x="136" y="1066" width="390" height="98" rx="20" fill="#00D1C7"/>
+  <text x="331" y="1128" fill="#081120" font-size="38" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">PARTICIPE</text>
+  <text x="136" y="1238" fill="#F7F7FF" font-size="28" font-family="Arial, sans-serif">Realizacao: VoxLabs Experience</text>
+  <text x="734" y="1238" fill="#F7F7FF" font-size="28" font-family="Arial, sans-serif">500 vagas</text>
+</svg>
